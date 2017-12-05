@@ -1,0 +1,15 @@
+{
+  "name": "api-bot",
+  "description": "Test",
+  "version": "0.0.0",
+  "main": "api.js",
+  "scripts": {
+    "start": "node api.js"
+  },
+  "dependencies": {
+    "discord.js": "11.2.1",
+    "request": "2.81.0",
+    "eve-swagger": "0.0.8",
+    "eveonlinejs": ""
+  }
+}
