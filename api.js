@@ -165,7 +165,7 @@ async.series([
   function setAuth(step) {
     var creds_json = {
       client_email: process.env.EMAIL_TOKEN,
-      private_key: process.env.PRIVATE_KEY
+      private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
     }
  
     doc.useServiceAccountAuth(creds, step);
