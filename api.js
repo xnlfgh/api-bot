@@ -169,7 +169,7 @@ async.series([
       private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
     }
  
-    doc.useServiceAccountAuth(creds, step);
+    doc.useServiceAccountAuth(creds_json, step);
   },
   function getInfoAndWorksheets(step) {
     doc.getInfo(function(err, info) {
