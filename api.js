@@ -164,6 +164,7 @@ function corpIDOld(newState) {
 async.series([
   function setAuth(step) {
     var creds_json = {
+      projectId: process.env.PROJECT_ID,
       client_email: process.env.EMAIL_TOKEN,
       private_key: process.env.PRIVATE_KEY.replace(/\\n/g, '\n')
     }
