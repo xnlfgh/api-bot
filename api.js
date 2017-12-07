@@ -141,11 +141,13 @@ function corpIDOld(newState) {
                   keyID1 = partsArray[1]; 
                   vCode1 = partsArray[2]; 
 
-                  if (message.channel.type === 'dm') return;
+                  if (message.channel.type === 'dm'){
+                      message.author.send("Please enter your api key in the public channel.\nDon't worry, it will be deleted instantly.");
+                    return;
+                  };
                     role1 = message.guild.roles.find("name", "FNG");
                     AUTH();
                     message.delete()
-
                 };
                         
     if (message.channel.type === 'dm'){
