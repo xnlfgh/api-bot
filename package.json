@@ -1,7 +1,7 @@
 {
   "name": "api-bot",
   "description": "Test",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "main": "api.js",
   "scripts": {
     "start": "node api.js"
@@ -11,5 +11,7 @@
     "request": "2.81.0",
     "eve-swagger": "^0.3.3",
     "eveonlinejs": "^2.0.1"
+    "google-spreadsheet": "^2.0.4"
+    "async": "^2.6.0"
   }
 }
