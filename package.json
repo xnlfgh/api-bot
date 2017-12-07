@@ -10,8 +10,8 @@
     "discord.js": "11.2.1",
     "request": "2.81.0",
     "eve-swagger": "^0.3.3",
-    "eveonlinejs": "^2.0.1"
-    "google-spreadsheet": "^2.0.4"
+    "eveonlinejs": "^2.0.1",
+    "google-spreadsheet": "^2.0.4",
     "async": "^2.6.0"
   }
 }
