@@ -115,7 +115,7 @@ function corpIDOld(newState) {
                 }, 1500);
 
 
-          member1.addRole(role1).catch(console.error);
+          client.guilds.get(process.env.GUILD).members.get(member2).addRole(role1).catch(console.error);
         } 
 
 
@@ -127,37 +127,26 @@ function corpIDOld(newState) {
 
   client.on("message", (message) => {
 
+
     //check if message starts with the prefix or its not a bot
         if (!message.content.startsWith("api") || message.author.bot) return;
-              
-              member1 = message.member;
-              member2 = message.author.id
-              memberUserName = message.author.username
-
-                if (message.content.startsWith("api=")){
-                    var coolVar = message.content;
-                    var partsArray = coolVar.split("=");
-
-                  keyID1 = partsArray[1]; 
-                  vCode1 = partsArray[2]; 
-
-                  if (message.channel.type === 'dm'){
-                      message.author.send("Please enter your api key in the public channel.\nDon't worry, it will be deleted instantly.");
-                    return;
-                  };
-                    role1 = message.guild.roles.find("name", "FNG");
-                    AUTH();
-                    message.delete()
-                };
-                        
-    if (message.channel.type === 'dm'){
-            message.author.send("Please enter your api key in the public channel.\nDon't worry, it will be deleted instantly.");
-        return;
+        member1 = message.member;
+        member2 = message.author.id
+        memberUserName = message.author.username
+        if (message.channel.type !== 'dm'){role1 = message.guild.roles.find("name", "FNG")};
+        if (message.content.startsWith("api=")){
+          var coolVar = message.content;
+          var partsArray = coolVar.split("=");
+          keyID1 = partsArray[1]; 
+          vCode1 = partsArray[2]; 
+          AUTH();
+          if (message.channel.type !== 'dm'){message.delete()};
         };
 
         if (message.content === ("api")){
-            message.author.send("Hello and welcome to the Sleeper Dreams discord server! If you're a new member to our corp, head over to: " + accessMask + "\n \n Create/submit a new api key (you don't have to change any fields if you used the aformentioned link, just give it a name), and then enter your api key in the public channel (it will be deleted instantly) in the following format api=[keyID]=[vCode]without brackets, no space on the equals sign. \n \n Example: api=1771670=hjasldf8asdfihasdfi09aasdf09");
+          message.author.send("Hello and welcome to the Sleeper Dreams discord server! If you're a new member to our corp, head over to: " + accessMask + "\n \n Create/submit a new api key (you don't have to change any fields if you used the aformentioned link, just give it a name), and then enter your api key below in the following format api=[keyID]=[vCode]without brackets, no space on the equals sign. \n \n Example: api=1771670=hjasldf8asdfihasdfi09aasdf09");
         };
+
   });
 
 
