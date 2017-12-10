@@ -1,8 +1,7 @@
-const Discord = require("discord.js");
+  const Discord = require("discord.js");
   let esi = require('eve-swagger');
   var eveonlinejs = require('eveonlinejs')
   const client = new Discord.Client();
-  
   var GoogleSpreadsheet = require('google-spreadsheet');
   var async = require('async');
 
@@ -23,10 +22,12 @@ const Discord = require("discord.js");
   var accessMask = "https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=8388608";
 
   // spreadsheet key is the long id in the sheets URL 
-var doc = new GoogleSpreadsheet(process.env.GOOGLESHEET);
-var sheet;
-var oldRow = 0;
-var oldCol = 0;
+  var doc = new GoogleSpreadsheet(process.env.GOOGLESHEET);
+  var sheet;
+  var oldRow = 0;
+  var oldCol = 0;
+  var oldRow1 = 0;
+  var oldCol1 = 0;
 
 
 client.login(process.env.BOT_TOKEN);
@@ -81,6 +82,8 @@ function corpIDOld(newState) {
                         sheet = info.worksheets[0];
                         oldRow = sheet.rowCount
                         oldCol = sheet.colCount
+                        oldRow1 = sheet.rowCount
+                        oldCol1 = sheet.colCount
                       });
            
                 setTimeout(function () {
@@ -94,6 +97,7 @@ function corpIDOld(newState) {
 
                     sheet.resize({rowCount: oldRow+1, colCount: oldCol}); //async 
                     oldRow=oldRow+1
+                    oldRow1=oldRow1+1
 
                     // bulk updates make it easy to update many cells at once 
                     cells[0].value = memberUserName;
@@ -123,7 +127,50 @@ function corpIDOld(newState) {
 
 }
 
+function purgeCorp(){
 
+  doc.getInfo(function(err, info) {
+    sheet = info.worksheets[0];
+    oldRow1 = sheet.rowCount
+    oldCol1 = sheet.colCount
+  });
+
+  for (i = 2; i < oldRow1; i++) { 
+    sheet.getCells({
+      'min-row': i,
+      'return-empty': true
+    }, function(err, cells) {
+
+      eveonlinejs.setParams({
+      keyID: cells[2].value,
+      vCode: cells[3].value
+      })
+
+      eveonlinejs.fetch('account:Characters', function (err, result) {
+        if (result !== undefined){
+          var apiString = JSON.stringify(result.characters);
+          var apiArray = apiString.split("\"");
+          toonCorp = apiArray[17];
+          toon2Corp = apiArray[51];
+          toon3Corp = apiArray[85];
+
+          if(toonCorp == 98465358 || toon2Corp == 98465358 || toon3Corp == 98465358 ){
+            //console.log(cells[0].value+" is in Corp")
+            return;
+          } else {
+            //console.log(cells[0].value+" Not in Corp")
+            client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your API indicates that you are no longer part of Sleeper Dreams.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
+            client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+          }
+        }else {
+          //console.log(cells[0].value+" Invalide API")
+          client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your Sleeper Dreams API failed.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
+          client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+        }
+      })
+    });
+  }
+};
 
   client.on("message", (message) => {
 
@@ -146,6 +193,9 @@ function corpIDOld(newState) {
         if (message.content === ("api")){
           message.author.send("Hello and welcome to the Sleeper Dreams discord server! If you're a new member to our corp, head over to: " + accessMask + "\n \n Create/submit a new api key (you don't have to change any fields if you used the aformentioned link, just give it a name), and then enter your api key below in the following format api=[keyID]=[vCode]without brackets, no space on the equals sign. \n \n Example: api=1771670=hjasldf8asdfihasdfi09aasdf09");
         };
+        if (message.content === ("api purge")){
+          purgeCorp();  
+        };
 
   });
 
@@ -165,6 +215,8 @@ async.series([
       sheet = info.worksheets[0];
       oldRow = sheet.rowCount
       oldCol = sheet.colCount
+      oldRow1 = sheet.rowCount
+      oldCol1 = sheet.colCount
       step();
     });
   },
