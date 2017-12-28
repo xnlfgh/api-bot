@@ -191,7 +191,7 @@ function purgeCorp(){
         };
 
         if (message.content === ("api")){
-          message.author.send("Hello and welcome to the Sleeper Dreams discord server! If you're a new member to our corp, head over to: " + accessMask + "\n \n Create/submit a new api key (you don't have to change any fields if you used the aformentioned link, just give it a name), and then enter your api key below in the following format api=[keyID]=[vCode]without brackets, no space on the equals sign. \n \n Example: api=1771670=hjasldf8asdfihasdfi09aasdf09");
+          message.author.send("`Hello and welcome to the Sleeper Dreams discord server! If you're a new member to our corp, head over to: https://community.eveonline.com/support/api-key/CreatePredefined?accessMask=3756972827 (This is the same api key used in your corp app)\n\nCreate a new api key (you don't have to change any fields if you used the above link, just give it a name), and then reply to me with your api key below in the following format `api=[keyID]=[vCode]` without brackets, no space on the equals sign. \n\n__Example:__ api=**1771670**=**hjasldf8asdfihasdfi09aasdf09**\n\n**The above API key is needed to retain access to our discord. It's recommended that you set it to never expire, and you should probably not delete it unless you like getting auto-removed from discord every day.**`");
         };
         if (message.content === ("api purge")){
           purgeCorp();  
