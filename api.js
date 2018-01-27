@@ -163,6 +163,7 @@ function purgeCorp(){
               client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your API indicates that you are no longer part of Sleeper Dreams.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
               client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked for not being in Corp");
               client.guilds.get(process.env.GUILD).members.get("284016927184257024").send(cells[0].value +" has been Kicked for not being in Corp");
+              client.guilds.get(process.env.GUILD).members.get("137908420010442752").send(cells[0].value +" has been Kicked for not being in Corp");
               client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
             }
           }
@@ -172,6 +173,7 @@ function purgeCorp(){
             client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your Sleeper Dreams API failed.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
             client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked for Invalide API");
             client.guilds.get(process.env.GUILD).members.get("284016927184257024").send(cells[0].value +" has been Kicked for Invalide API");
+            client.guilds.get(process.env.GUILD).members.get("137908420010442752").send(cells[0].value +" has been Kicked for Invalide API");
             client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
           }
         }
