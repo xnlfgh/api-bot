@@ -158,16 +158,22 @@ function purgeCorp(){
             //console.log(cells[0].value+" is in Corp")
             return;
           } else {
-            //console.log(cells[0].value+" Not in Corp")
-           client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your API indicates that you are no longer part of Sleeper Dreams.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
-           client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked");
-           client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+            if(client.guilds.get("273150571844730881").members.get(cells[1])!== undefined){
+              //console.log(cells[0].value+" Not in Corp")
+              client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your API indicates that you are no longer part of Sleeper Dreams.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
+              client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked for not being in Corp");
+              client.guilds.get(process.env.GUILD).members.get("284016927184257024").send(cells[0].value +" has been Kicked for not being in Corp");
+              client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+            }
           }
         }else {
-          //console.log(cells[0].value+" Invalide API")
-          client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your Sleeper Dreams API failed.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
-          client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked");
-          client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+          if(client.guilds.get("273150571844730881").members.get(cells[1])!== undefined){
+            //console.log(cells[0].value+" Invalide API")
+            client.guilds.get(process.env.GUILD).members.get(cells[1].value).send("Your Sleeper Dreams API failed.\nIf you are receiving this message and are still apart of Sleeper Dreams please contact a director.");
+            client.guilds.get(process.env.GUILD).members.get("188840162569093131").send(cells[0].value +" has been Kicked for Invalide API");
+            client.guilds.get(process.env.GUILD).members.get("284016927184257024").send(cells[0].value +" has been Kicked for Invalide API");
+            client.guilds.get(process.env.GUILD).members.get(cells[1].value).kick().catch(console.error);
+          }
         }
       })
     });
